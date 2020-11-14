@@ -58,19 +58,19 @@ let remindersController = {
     update: (req, res) => {
         // ⭐️ your implementation here ⭐️
 
+       let reminderToFind = req.params.id;
+
         for (var i in database.cindy.reminders) {
 
-            if (database.cindy.reminders[i].id == req.params.id) {
+            if (database.cindy.reminders[i].id == reminderToFind) {
 
                 database.cindy.reminders[i].title = req.body.title,
-                    database.cindy.reminders[i].description = req.body.description,
-                    (database.cindy.reminders[i].completed = true) || (database.cindy.reminders[i].completed = false)
+                database.cindy.reminders[i].description = req.body.description;
+
+                res.render('reminder/single-reminder', { reminderItem: database.cindy.reminders[i] });
             }
 
-            res.redirect('/reminders')
         }
-
-
 
     },
 
